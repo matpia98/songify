@@ -46,6 +46,10 @@ public class SongRestController {
             @PathVariable Integer id,
             @RequestHeader(required = false) String requestId) {
         log.info(requestId);
+        if (!database.containsKey(id)) {
+            throw new SongNotFoundException("Song with id " + id + " not found");
+        }
+
         String song = database.get(id);
         if (song == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
