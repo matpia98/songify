@@ -3,13 +3,11 @@ package com.songify.song.domain.service;
 
 import com.songify.song.domain.model.Song;
 import com.songify.song.domain.repository.SongRepository;
-import com.songify.song.domain.repository.SongRepositoryInMemory;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -33,4 +31,7 @@ public class SongRetriever {
                 .toList();
     }
 
+    public Optional<Song> findSongById(Long id) {
+        return songRepository.findById(id);
+    }
 }
