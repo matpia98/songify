@@ -2,6 +2,7 @@ package com.songify.song.domain.service;
 
 
 import com.songify.song.domain.model.Song;
+import com.songify.song.domain.model.SongNotFoundException;
 import com.songify.song.domain.repository.SongRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,10 @@ public class SongRetriever {
 
     public Optional<Song> findSongById(Long id) {
         return songRepository.findById(id);
+    }
+
+    public void existsById(Long id) {
+        findSongById(id)
+                .orElseThrow(() -> new SongNotFoundException("Song with id " + id + " not found"));
     }
 }

@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface SongRepository extends Repository<Song, Long> {
     Song save(Song song);
     List<Song> findAll();
-
     Optional<Song> findById(Long id);
+    void deleteById(Long id);
 }
