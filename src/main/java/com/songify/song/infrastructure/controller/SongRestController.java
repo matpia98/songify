@@ -3,6 +3,7 @@ package com.songify.song.infrastructure.controller;
 import com.songify.song.domain.service.SongAdder;
 import com.songify.song.domain.service.SongDeleter;
 import com.songify.song.domain.service.SongRetriever;
+import com.songify.song.domain.service.SongUpdater;
 import com.songify.song.infrastructure.controller.dto.request.PartiallyUpdateSongRequestDto;
 import com.songify.song.infrastructure.controller.dto.request.CreateSongRequestDto;
 import com.songify.song.infrastructure.controller.dto.request.UpdateSongRequestDto;
@@ -29,6 +30,7 @@ public class SongRestController {
     private final SongAdder songAdder;
     private final SongRetriever songRetriever;
     private final SongDeleter songDeleter;
+    private final SongUpdater songUpdater;
 
 
     @GetMapping
@@ -73,14 +75,11 @@ public class SongRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UpdateSongResponseDto> update(@PathVariable Integer id,
+    public ResponseEntity<UpdateSongResponseDto> update(@PathVariable Long id,
                                                         @RequestBody @Valid UpdateSongRequestDto request) {
-        List<Song> allSongs = songRetriever.findAll();
-        if (!allSongs.contains(id)) {
-            throw new SongNotFoundException("Song with id " + id + " not found");
-        }
+        songRetriever.existsById(id);
         Song newSong = SongMapper.mapFromUpdateSongRequestDtoToSong(request);
-        Song oldSong = songAdder.addSong(newSong);
+        songUpdater.updateById(id, newSong);
         UpdateSongResponseDto body = SongMapper.mapFromSongToUpdateSongResponseDto(newSong);
         return ResponseEntity.ok(body);
     }
