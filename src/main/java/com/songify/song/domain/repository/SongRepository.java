@@ -10,10 +10,10 @@ import java.util.Map;
 public class SongRepository {
 
     Map<Integer, Song> database = new HashMap<>(Map.of(
-            1, new Song("shawnmendes song", "Shawn Mendes"),
-            2, new Song("ariana grande song2", "Ariana Grande"),
-            3, new Song("ariana grande song22121", "Ariana Grande"),
-            4, new Song("ariana grande song2another", "Ariana Grande")
+            1, new Song("Shape of You", "Ed Sheeran"),
+            2, new Song("Rain on Me", "Lady Gaga, Ariana Grande"),
+            3, new Song("Blinding Lights", "The Weeknd"),
+            4, new Song("Levitating", "Dua Lipa ft. DaBaby")
     ));
 
     public Song saveToDatabase(Song song) {
