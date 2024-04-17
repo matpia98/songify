@@ -20,6 +20,7 @@ public class SongUpdater {
     }
 
     public void updateById(Long id, Song newSong) {
+        songRetriever.existsById(id);
         songRepository.updateById(id, newSong);
     }
 }
