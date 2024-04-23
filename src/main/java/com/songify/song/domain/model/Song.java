@@ -1,14 +1,16 @@
 package com.songify.song.domain.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.Instant;
 
 @Builder
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "song")
 public class Song {
     @Id
@@ -21,17 +23,14 @@ public class Song {
     @Column(nullable = false)
     String artist;
 
-    public Song() {
+    private Instant releaseDate;
+    private Long duration;
 
-    }
+    @Enumerated(EnumType.STRING)
+    private SongLanguage language;
     public Song(String name, String artist) {
         this.name = name;
         this.artist = artist;
     }
 
-    public Song(Long id, String name, String artist) {
-        this.id = id;
-        this.name = name;
-        this.artist = artist;
-    }
 }
