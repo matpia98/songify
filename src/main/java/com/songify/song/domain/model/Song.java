@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.Objects;
 
 @Builder
 @Getter
@@ -12,7 +13,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "song")
-public class Song {
+public class Song extends BaseEntity{
     @Id
     @GeneratedValue(generator = "song_id_seq", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(
