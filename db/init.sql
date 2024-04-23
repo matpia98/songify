@@ -5,7 +5,6 @@
 --     name VARCHAR(255) NOT NULL
 -- );
 --
---
 -- INSERT INTO song (id, artist, name)
 -- VALUES (nextval('song_id_seq'), 'Ariana Grande', 'Tik Tok');
 -- INSERT INTO song (id, artist, name)
