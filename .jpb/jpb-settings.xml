@@ -4,6 +4,7 @@
   <component name="JpaLiquibaseChangesConfig">
     <exclude-change idName="song_id_seq" tagName="createSequence" />
     <exclude-change idName="genre_id_seq" tagName="createSequence" />
+    <exclude-change idName="album_id_seq" tagName="createSequence" />
   </component>
   <component name="PersistenceUnitSettings">
     <persistence-units>
