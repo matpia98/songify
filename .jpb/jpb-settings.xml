@@ -7,6 +7,9 @@
     <exclude-change idName="album_id_seq" tagName="createSequence" />
     <exclude-change idName="artist_id_seq" tagName="createSequence" />
     <exclude-change idName="genre#name" tagName="dropNotNullConstraint" />
+    <exclude-change idName="album#uuid" tagName="dropNotNullConstraint" />
+    <exclude-change idName="artist#uuid" tagName="dropNotNullConstraint" />
+    <exclude-change idName="genre#uuid" tagName="dropNotNullConstraint" />
   </component>
   <component name="PersistenceUnitSettings">
     <persistence-units>

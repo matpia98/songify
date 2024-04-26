@@ -15,10 +15,11 @@ SONGIFY: AN APPLICATION TO MANAGE ALBUMS, ARTISTS AND SONGS
 13. Songs can only be assigned to albums
 14. you can assign artists to albums (an album can have more artists, an artist can have several albums)
 15. you can assign only one genre to a song
+16. if there is no music genre assigned to a song, "default" is displayed
 16. all songs can be displayed
-    All genres can be displayed
-18. all artists may be displayed
-    All Albums may be displayed
+17. All genres can be displayed
+18. all artists may be displayed 
+19. All Albums may be displayed
 20. All albums with artists and songs in the album may be displayed.
 21. Can display specific music genres with songs
 22. You may view specific artists with their albums
