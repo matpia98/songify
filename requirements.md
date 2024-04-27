@@ -1,6 +1,6 @@
 SONGIFY: AN APPLICATION TO MANAGE ALBUMS, ARTISTS AND SONGS
 
-1. an artist can be added (artist name)
+~~1. an artist can be added (artist name)~~
 2. you can add a music genre (name of the genre)
 3. you can add an album (title, release date, but at least one song must be in it)
 4. you can add a song (title, duration, release date, and the artist it belongs to)
