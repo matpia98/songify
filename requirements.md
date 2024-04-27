@@ -2,7 +2,7 @@ SONGIFY: AN APPLICATION TO MANAGE ALBUMS, ARTISTS AND SONGS
 
 ~~1. an artist can be added (artist name)~~
 ~~2. you can add a music genre (name of the genre)~~
-3. you can add an album (title, release date, but at least one song must be in it)
+~~3. you can add an album (title, release date, but at least one song must be in it)~~
 4. you can add a song (title, duration, release date, and the artist it belongs to)
    You can delete an artist (delete their songs and albums)
 6. You can delete a genre (but there cannot be a song with this genre)
@@ -40,8 +40,8 @@ given there is no songs, artists, albums and genres created before
 8. when I go to /song/1 then I can see "Rap" genre
 9. when I put to /song/2/genre/1 then Genre with id 1 ("Rap") is added to Song with id 2 ("Lose Yourself")
 10. when I go to /album then I can see no albums
-11. when I post to /album with Album "EminemAlbum1" then Album "EminemAlbum1" is returned with id 1
-12. when I go to /album/1 then I can see no songs added to album
+11. when I post to /album with Album "EminemAlbum1" and Song with id 1 then Album "EminemAlbum1" is returned with id 1
+12. when I go to /album/1 then I can see song with id 1 added to it
 13. when I put to /album/1/song/1 then Song with id 1 ("Til i collapse") is added to Album with id 1 ("EminemAlbum1")
 14. when I put to /album/1/song/2 then Song with id 2 ("Lose Yourself") is added to Album with id 1 ("EminemAlbum1")
 15. when I go to /album/1/song then I can see 2 songs (id 1, id 2)

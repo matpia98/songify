@@ -1,10 +1,13 @@
 package com.songify.domain.crud;
 
+import com.songify.domain.crud.dto.AlbumDto;
+import com.songify.domain.crud.dto.AlbumRequestDto;
 import com.songify.domain.crud.dto.ArtistDto;
 import com.songify.domain.crud.dto.ArtistRequestDto;
 import com.songify.domain.crud.dto.GenreDto;
 import com.songify.domain.crud.dto.GenreRequestDto;
 import com.songify.domain.crud.dto.SongDto;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class SongifyCrudFacade {
 
     private final SongAdder songAdder;
@@ -22,6 +26,7 @@ public class SongifyCrudFacade {
     private final SongUpdater songUpdater;
     private final ArtistAdder artistAdder;
     private final GenreAdder genreAdder;
+    private final AlbumAdder albumAdder;
 
     public ArtistDto addArtist(ArtistRequestDto dto) {
         return artistAdder.addArtist(dto.name());
@@ -31,6 +36,9 @@ public class SongifyCrudFacade {
         return genreAdder.addGenre(dto.name());
     }
 
+    public AlbumDto addAlbumWithSong(AlbumRequestDto dto) {
+        return albumAdder.addAlbum(dto.songId(), dto.title(), dto.releaseDate());
+    }
     public List<SongDto> findAll(final Pageable pageable) {
         return songRetriever.findAll(pageable)
                 .stream()
@@ -51,7 +59,7 @@ public class SongifyCrudFacade {
 
     public SongDto updatePartiallyById(Long id, SongDto songFromRequest) {
         songRetriever.existsById(id);
-        Song songFromDatabase = songRetriever.findSongDtoById(id);
+        Song songFromDatabase = songRetriever.findSongById(id);
         Song toSave = new Song();
         if (songFromRequest.name() != null) {
             toSave.setName(songFromRequest.name());
@@ -90,7 +98,7 @@ public class SongifyCrudFacade {
     }
 
     public SongDto findSongDtoById(Long id) {
-        Song song = songRetriever.findSongDtoById(id);
+        Song song = songRetriever.findSongById(id);
         return SongDto.builder()
                 .id(song.getId())
                 .name(song.getName())

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@ControllerAdvice(assignableTypes = SongRestController.class)
+@ControllerAdvice
 @Log4j2
 public class SongErrorHandler {
 
