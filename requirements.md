@@ -16,14 +16,14 @@ SONGIFY: AN APPLICATION TO MANAGE ALBUMS, ARTISTS AND SONGS
 14. you can assign artists to albums (an album can have more artists, an artist can have several albums)
 15. you can assign only one genre to a song
 16. if there is no music genre assigned to a song, "default" is displayed
-16. all songs can be displayed
-17. All genres can be displayed
-18. all artists may be displayed 
-~~19. All Albums may be displayed~~
-20. All albums with artists and songs in the album may be displayed.
-21. Can display specific music genres with songs
-22. You may view specific artists with their albums
-23. you want to have persistent data
+~~17. all songs can be displayed~~
+18. All genres can be displayed
+~~19. all artists may be displayed~~ 
+20. All Albums may be displayed~~
+21. All albums with artists and songs in the album may be displayed.
+22. Can display specific music genres with songs
+23. You may view specific artists with their albums
+24. you want to have persistent data
 
 
 HAPPY PATH (user tworzy album "Eminema" z piosenkami "Til i collapse", "Lose Yourself", o gatunku Rap)

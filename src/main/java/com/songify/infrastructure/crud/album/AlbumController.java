@@ -3,8 +3,6 @@ package com.songify.infrastructure.crud.album;
 import com.songify.domain.crud.SongifyCrudFacade;
 import com.songify.domain.crud.dto.AlbumDto;
 import com.songify.domain.crud.dto.AlbumRequestDto;
-import com.songify.domain.crud.dto.ArtistDto;
-import com.songify.domain.crud.dto.ArtistRequestDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/album")
+@RequestMapping("/albums")
 class AlbumController {
 
     private final SongifyCrudFacade songifyCrudFacade;
