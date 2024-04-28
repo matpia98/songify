@@ -3,7 +3,7 @@ SONGIFY: AN APPLICATION TO MANAGE ALBUMS, ARTISTS AND SONGS
 ~~1. an artist can be added (artist name)~~
 ~~2. you can add a music genre (name of the genre)~~
 ~~3. you can add an album (title, release date, but at least one song must be in it)~~
-4. you can add a song (title, duration, release date, and the artist it belongs to)
+~~4. you can add a song (title, duration, release date, and the artist it belongs to)~~
    You can delete an artist (delete their songs and albums)
 6. You can delete a genre (but there cannot be a song with this genre)
 7. you can delete an album (but only when there is no longer any song associated with the album)
@@ -19,7 +19,7 @@ SONGIFY: AN APPLICATION TO MANAGE ALBUMS, ARTISTS AND SONGS
 16. all songs can be displayed
 17. All genres can be displayed
 18. all artists may be displayed 
-19. All Albums may be displayed
+~~19. All Albums may be displayed~~
 20. All albums with artists and songs in the album may be displayed.
 21. Can display specific music genres with songs
 22. You may view specific artists with their albums
