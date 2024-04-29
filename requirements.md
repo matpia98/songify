@@ -20,7 +20,7 @@ SONGIFY: AN APPLICATION TO MANAGE ALBUMS, ARTISTS AND SONGS
 18. All genres can be displayed
 ~~19. all artists may be displayed~~ 
 20. All Albums may be displayed~~
-21. All albums with artists and songs in the album may be displayed.
+21. ~~All albums with artists and songs in the album may be displayed.~~
 22. Can display specific music genres with songs
 23. You may view specific artists with their albums
 24. you want to have persistent data
