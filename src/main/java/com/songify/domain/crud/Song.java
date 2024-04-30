@@ -29,7 +29,7 @@ class Song extends BaseEntity {
     private Instant releaseDate;
     private Long duration;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Genre genre;
 
     @Enumerated(EnumType.STRING)

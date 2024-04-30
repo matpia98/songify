@@ -1,34 +1,31 @@
 SONGIFY: AN APPLICATION TO MANAGE ALBUMS, ARTISTS AND SONGS
 
-~~1. an artist can be added (artist name)~~
-~~2. you can add a music genre (name of the genre)~~
-~~3. you can add an album (title, release date, but at least one song must be in it)~~
-~~4. you can add a song (title, duration, release date, and the artist it belongs to)~~
-   You can delete an artist (delete their songs and albums)
-6. You can delete a genre (but there cannot be a song with this genre)
-7. you can delete an album (but only when there is no longer any song associated with the album)
-8. you can delete a song
-9. you can edit the artist's song, and the artist's name
-10. You can edit the name of the music genre
+~~1. you can add an artist (artist name)~~
+~~2. you can add a music genre (genre name)~~
+~~3. you can add an album (title, release date, but there must be at least one song in it)~~
+~~4. You can add a song (title, duration, release date, song language)~~
+5. You can delete an artist (in which case you delete their songs and albums)
+6. You can delete a genre (but there cannot be a song with that genre)
+7. an album can be deleted (but only when there is no longer any song associated with the album)
+8. you can delete a song, but you don't delete the album and artists when there was only 1 song in the album
+9. Songs of an artist can be edited, as well as the artist's name
+10. You can edit the name of a music genre
 11. you can edit the album (add songs, artists, change album name)
 12. You can edit the song (duration, artist, song name)
 13. Songs can only be assigned to albums
 14. you can assign artists to albums (an album can have more artists, an artist can have several albums)
-15. you can assign only one genre to a song
+15. you can assign only one music genre to a song
 16. if there is no music genre assigned to a song, "default" is displayed
-~~17. all songs can be displayed~~
-18. All genres can be displayed
-~~19. all artists may be displayed~~ 
-20. All Albums may be displayed~~
-21. ~~All albums with artists and songs in the album may be displayed.~~
-22. Can display specific music genres with songs
-23. You may view specific artists with their albums
+~~17. you can display all songs~~
+18. all genres can be displayed
+~~19. You can display all artists~~
+20. You can display all albums
+~~21. You can display specific albums with artists and songs in the album~~
+22. Specific music genres can be displayed with songs
+23. You can display specific artists with their albums
 24. you want to have persistent data
 
-
-HAPPY PATH (user tworzy album "Eminema" z piosenkami "Til i collapse", "Lose Yourself", o gatunku Rap)
-
-given there is no songs, artists, albums and genres created before
+HAPPY PATH (user creates the album "Eminem" with songs "Til and collapse", "Lose Yourself", about the Rap genre)
 
 1. when I go to /song then I can see no songs
 2. when I post to /song with Song "Till i collapse" then Song "Til i collapse" is returned with id 1

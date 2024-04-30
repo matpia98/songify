@@ -100,4 +100,8 @@ public class SongifyCrudFacade {
         songRetriever.existsById(id);
         songDeleter.deleteById(id);
     }
+
+//    public void deleteSongAndGenreById(Long songId) {
+//        songDeleter.deleteSongAndGenreById(songId);
+//    }
 }
