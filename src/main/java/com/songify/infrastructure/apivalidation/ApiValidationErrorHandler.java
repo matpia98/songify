@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
-@ControllerAdvice(assignableTypes = SongRestController.class)
+@ControllerAdvice
 class ApiValidationErrorHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
