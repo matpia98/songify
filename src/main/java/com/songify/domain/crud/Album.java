@@ -23,6 +23,7 @@ import java.util.Set;
 @Getter(AccessLevel.PACKAGE)
 @Setter(AccessLevel.PACKAGE)
 class Album extends BaseEntity {
+
     @Id
     @GeneratedValue(generator = "album_id_seq", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(
@@ -50,5 +51,9 @@ class Album extends BaseEntity {
     void removeArtist(Artist artist) {
         artists.remove(artist);
         artist.removeAlbum(this);
+    }
+
+    void addArtist(final Artist artist) {
+        artists.add(artist);
     }
 }

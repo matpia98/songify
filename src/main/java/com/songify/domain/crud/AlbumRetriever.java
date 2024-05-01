@@ -13,12 +13,19 @@ class AlbumRetriever {
 
     private final AlbumRepository albumRepository;
 
-    AlbumInfo findAlbumByIdWithArtistsAndSongs(Long id) {
+    AlbumInfo findAlbumByIdWithArtistsAndSongs(final Long id) {
         return albumRepository.findAlbumByIdWithSongsAndArtists(id)
-                .orElseThrow(() -> new AlbumNotFoundException("Album with id " + id + " not found"));
+                .orElseThrow(() -> new AlbumNotFoundException("Album with id: " + id + " not found"));
     }
 
-    Set<Album> findAlbumsByArtistId(Long id) {
-        return albumRepository.findAllAlbumsByArtistId(id);
+    Set<Album> findAlbumsByArtistId(final Long artistId) {
+        return albumRepository.findAllAlbumsByArtistId(artistId);
+    }
+
+    Album findById(final Long albumId) {
+        return albumRepository.findById(albumId)
+                .orElseThrow(
+                        () -> new AlbumNotFoundException("Album with id: " + albumId + " not found")
+                );
     }
 }
