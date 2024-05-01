@@ -1,6 +1,8 @@
 package com.songify.domain.crud.util;
 
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Version;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
@@ -15,6 +17,10 @@ public abstract class BaseEntity implements Serializable {
 
     @CreationTimestamp
     public Instant createdOn;
+
+    @Version
+    @NotNull
+    private Long version;
 
     @Override
     public boolean equals(Object o) {
