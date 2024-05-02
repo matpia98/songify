@@ -22,18 +22,18 @@ import java.util.Set;
 @Transactional
 public class SongifyCrudFacade {
 
-    private final SongAdder songAdder;
     private final SongRetriever songRetriever;
-    private final SongDeleter songDeleter;
+    private final SongAdder songAdder;
     private final SongUpdater songUpdater;
-    private final ArtistAdder artistAdder;
-    private final GenreAdder genreAdder;
-    private final AlbumAdder albumAdder;
+    private final SongDeleter songDeleter;
     private final ArtistRetriever artistRetriever;
-    private final ArtistDeleter artistDeleter;
-    private final AlbumRetriever albumRetriever;
-    private final ArtistAssigner artistAssigner;
+    private final ArtistAdder artistAdder;
     private final ArtistUpdater artistUpdater;
+    private final ArtistDeleter artistDeleter;
+    private final ArtistAssigner artistAssigner;
+    private final GenreAdder genreAdder;
+    private final AlbumRetriever albumRetriever;
+    private final AlbumAdder albumAdder;
 
 
     public ArtistDto addArtist(ArtistRequestDto dto) {
