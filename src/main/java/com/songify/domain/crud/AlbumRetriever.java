@@ -1,11 +1,13 @@
 package com.songify.domain.crud;
 
+import com.songify.domain.crud.dto.AlbumDto;
 import com.songify.domain.crud.dto.AlbumInfo;
 import com.songify.infrastructure.crud.album.AlbumNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -20,6 +22,13 @@ class AlbumRetriever {
 
     Set<Album> findAlbumsByArtistId(final Long artistId) {
         return albumRepository.findAllAlbumsByArtistId(artistId);
+    }
+
+    Set<AlbumDto> findAlbumsDtoByArtistId(final Long artistId) {
+        return albumRepository.findAllAlbumsByArtistId(artistId)
+                .stream().map(
+                        album -> new AlbumDto(album.getId(), album.getTitle())
+                ).collect(Collectors.toSet());
     }
 
     Album findById(final Long albumId) {

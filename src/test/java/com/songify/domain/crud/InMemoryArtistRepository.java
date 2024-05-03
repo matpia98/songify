@@ -15,7 +15,8 @@ class InMemoryArtistRepository implements ArtistRepository {
     AtomicInteger index = new AtomicInteger(0);
     @Override
     public int deleteById(Long id) {
-        return 0;
+        db.remove(id);
+        return id.intValue();
     }
 
     @Override
@@ -33,6 +34,7 @@ class InMemoryArtistRepository implements ArtistRepository {
 
     @Override
     public Optional<Artist> findById(Long artistId) {
-        return Optional.empty();
+        Artist value = db.get(artistId);
+        return Optional.ofNullable(value);
     }
 }
