@@ -46,6 +46,7 @@ class ArtistDeleter {
                 .map(Album::getId)
                 .collect(Collectors.toSet());
         albumDeleter.deleteAllAlbumsByIds(albumsIdsToDelete);
+        artistRepository.deleteById(artistId);
 
     }
 }

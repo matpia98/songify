@@ -123,6 +123,14 @@ public class SongifyCrudFacade {
         return albumRetriever.findAlbumsDtoByArtistId(artistId);
     }
 
+    int countArtistsByAlbumId(Long albumId) {
+        return albumRetriever.countArtistsByAlbumId(albumId);
+    }
+
+    AlbumDto findAlbumById(Long albumId) {
+        return albumRetriever.findDtoById(albumId);
+    }
+
 //    public void deleteSongAndGenreById(Long songId) {
 //        songDeleter.deleteSongAndGenreById(songId);
 //    }

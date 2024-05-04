@@ -32,4 +32,9 @@ class Genre extends BaseEntity {
     Genre(String name) {
         this.name = name;
     }
+
+    Genre(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
