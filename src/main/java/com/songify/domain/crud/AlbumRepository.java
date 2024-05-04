@@ -36,4 +36,6 @@ interface AlbumRepository extends Repository<Album, Long> {
 
     @Query("SELECT COUNT(a.artists) from Album a WHERE a.id = :albumId")
     int countArtistsByAlbumId(@Param("albumId") Long albumId);
+
+    Set<Album> findAll();
 }

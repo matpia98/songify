@@ -4,6 +4,7 @@ import com.songify.domain.crud.dto.AlbumInfo;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -36,11 +37,9 @@ class InMemoryAlbumRepository implements AlbumRepository {
 
     @Override
     public Optional<AlbumInfo> findAlbumByIdWithSongsAndArtists(Long id) {
-//        Album album = db.get(id);
-//        Set<Artist> artists = album.getArtists();
-//        Set<Song> songs = album.getSongs();
-//        return Optional.ofNullable;
-        return Optional.empty();
+        Album album = db.get(id);
+        AlbumInfoTestImpl albumInfoTest = new AlbumInfoTestImpl(album);
+        return Optional.of(albumInfoTest);
     }
 
     @Override
@@ -55,5 +54,10 @@ class InMemoryAlbumRepository implements AlbumRepository {
     public int countArtistsByAlbumId(Long albumId) {
         Album album = db.get(albumId);
         return album.getArtists().size();
+    }
+
+    @Override
+    public Set<Album> findAll() {
+        return new HashSet<>(db.values());
     }
 }
