@@ -26,4 +26,9 @@ class ArtistRetriever {
         return artistRepository.findById(artistId)
                 .orElseThrow(() -> new ArtistNotFoundException(artistId.toString()));
     }
+
+    ArtistDto findDtoById(Long artistId) {
+        Artist artist = findById(artistId);
+        return new ArtistDto(artist.getId(), artist.getName());
+    }
 }
