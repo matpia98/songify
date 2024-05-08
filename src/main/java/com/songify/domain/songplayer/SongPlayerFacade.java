@@ -2,15 +2,13 @@ package com.songify.domain.songplayer;
 
 import com.songify.domain.crud.SongifyCrudFacade;
 import com.songify.domain.crud.dto.SongDto;
-import org.springframework.stereotype.Service;
 
-@Service
 class SongPlayerFacade {
 
     private final SongifyCrudFacade songifyCrudFacade;
     private final YoutubeHttpClient youtubeHttpClient;
 
-    SongPlayerFacade(SongifyCrudFacade songifyCrudFacade, YoutubeHttpClient youtubeHttpClient) {
+    SongPlayerFacade(final SongifyCrudFacade songifyCrudFacade, final YoutubeHttpClient youtubeHttpClient) {
         this.songifyCrudFacade = songifyCrudFacade;
         this.youtubeHttpClient = youtubeHttpClient;
     }
