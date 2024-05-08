@@ -168,10 +168,11 @@ class SongifyCrudFacadeTest {
         assertThat(songifyCrudFacade.findAllSongs(Pageable.unpaged())).isEmpty();
 
         // when
-        songifyCrudFacade.addSong(song);
+        SongDto songDto = songifyCrudFacade.addSong(song);
 
         // then
         List<SongDto> allSongs = songifyCrudFacade.findAllSongs(Pageable.unpaged());
+        assertThat(songDto.genre().id()).isEqualTo(1L);
         assertThat(allSongs.size()).isEqualTo(1);
         assertThat(allSongs)
                 .extracting("id")
