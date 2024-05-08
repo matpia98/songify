@@ -1,11 +1,11 @@
 version: "3.8"
 services:
   db:
-    image: postgres
+    image: postgres:15
     container_name: local_pgdb
     restart: always
     ports:
-      - "54320:5432"
+      - "54321:5432"
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: admin
