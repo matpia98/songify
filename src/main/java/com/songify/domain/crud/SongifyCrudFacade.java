@@ -22,18 +22,18 @@ import java.util.Set;
 @Transactional
 public class SongifyCrudFacade {
 
-    private final SongAdder songAdder;
     private final SongRetriever songRetriever;
-    private final SongDeleter songDeleter;
+    private final SongAdder songAdder;
     private final SongUpdater songUpdater;
-    private final ArtistAdder artistAdder;
-    private final GenreAdder genreAdder;
-    private final AlbumAdder albumAdder;
+    private final SongDeleter songDeleter;
     private final ArtistRetriever artistRetriever;
-    private final ArtistDeleter artistDeleter;
-    private final AlbumRetriever albumRetriever;
-    private final ArtistAssigner artistAssigner;
+    private final ArtistAdder artistAdder;
     private final ArtistUpdater artistUpdater;
+    private final ArtistDeleter artistDeleter;
+    private final ArtistAssigner artistAssigner;
+    private final GenreAdder genreAdder;
+    private final AlbumRetriever albumRetriever;
+    private final AlbumAdder albumAdder;
 
 
     public ArtistDto addArtist(ArtistRequestDto dto) {
@@ -45,19 +45,21 @@ public class SongifyCrudFacade {
     }
 
     public AlbumDto addAlbumWithSong(AlbumRequestDto dto) {
-        return albumAdder.addAlbum(dto.songId(), dto.title(), dto.releaseDate());
+        return albumAdder.addAlbum(dto.songIds(), dto.title(), dto.releaseDate());
     }
+
     public void addArtistToAlbum(Long artistId, Long albumId) {
         artistAssigner.addArtistToAlbum(artistId, albumId);
     }
 
-    public ArtistDto updateArtistNameById(Long artistId, String name){
+    public ArtistDto updateArtistNameById(Long artistId, String name) {
         return artistUpdater.updateArtistNameById(artistId, name);
     }
 
     public ArtistDto addArtistWithDefaultAlbumAndSong(ArtistRequestDto dto) {
         return artistAdder.addArtistWithDefaultAlbumAndSong(dto);
     }
+
     public SongDto addSong(final SongRequestDto dto) {
         return songAdder.addSong(dto);
     }
@@ -117,6 +119,26 @@ public class SongifyCrudFacade {
     public void deleteSongById(Long id) {
         songRetriever.existsById(id);
         songDeleter.deleteById(id);
+    }
+
+    Set<AlbumDto> findAlbumsByArtistId(Long artistId) {
+        return albumRetriever.findAlbumsDtoByArtistId(artistId);
+    }
+
+    int countArtistsByAlbumId(Long albumId) {
+        return albumRetriever.countArtistsByAlbumId(albumId);
+    }
+
+    AlbumDto findAlbumById(Long albumId) {
+        return albumRetriever.findDtoById(albumId);
+    }
+
+    Set<AlbumDto> findAllAlbums() {
+        return albumRetriever.findAll();
+    }
+
+    ArtistDto findArtistById(Long artistId) {
+        return artistRetriever.findDtoById(artistId);
     }
 
 //    public void deleteSongAndGenreById(Long songId) {
