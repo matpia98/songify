@@ -43,10 +43,10 @@ class HappyPathIntegrationTest {
     }
 
     @Test
-    public void f() throws Exception {
+    public void happyPath() throws Exception {
 //  1. when I go to /songs then I can see no songs
         mockMvc.perform(get("/songs")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.songs", empty()));
 
@@ -62,16 +62,16 @@ class HappyPathIntegrationTest {
 
 //  2. when I post to /song with Song "Till i collapse" then Song "Till i collapse" is returned with id 1
         mockMvc.perform(post("/songs")
-                .content("""
-                        {
-                            "name": "Till i collapse",
-                            "releaseDate": "2024-05-08T14:55:21.850Z",
-                            "duration": 0,
-                            "language": "ENGLISH"
-                        }
-                        """)
-                .contentType(MediaType.APPLICATION_JSON)
-        )
+                        .content("""
+                                {
+                                    "name": "Till i collapse",
+                                    "releaseDate": "2024-05-08T14:55:21.850Z",
+                                    "duration": 0,
+                                    "language": "ENGLISH"
+                                }
+                                """.trim())
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.song.id", is(1)))
                 .andExpect(jsonPath("$.song.name", is("Till i collapse")))
@@ -80,8 +80,32 @@ class HappyPathIntegrationTest {
 
 
 //  3. when I post to /song with Song "Lose Yourself" then Song "Lose Yourself" is returned with id 2
-//  4. when I go to /genre then I can see only default genre with id 1
-//  5. when I post to /genre with Genre "Rap" then Genre "Rap" is returned with id 2
+        mockMvc.perform(post("/songs")
+                        .content("""
+                                {
+                                    "name": "Lose Yourself",
+                                    "releaseDate": "2024-05-08T17:11:21.850Z",
+                                    "duration": 0,
+                                    "language": "ENGLISH"
+                                }
+                                """.trim())
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.song.id", is(2)))
+                .andExpect(jsonPath("$.song.name", is("Lose Yourself")))
+                .andExpect(jsonPath("$.song.genre.id", is(1)))
+                .andExpect(jsonPath("$.song.genre.name", is("default")));
+
+//  4. when I go to /genres then I can see only default genre with id 1
+        mockMvc.perform(get("/genres")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.genres[0].id", is(1)))
+                .andExpect(jsonPath("$.genres[0].name", is("default")));
+
+
+//  5. when I post to /genres with Genre "Rap" then Genre "Rap" is returned with id 2
 //  6. when I go to /song/1 then I can see default genre with id 1 and name default
 //  7. when I put to /song/1/genre/1 then Genre with id 2 ("Rap") is added to Song with id 1 ("Til i collapse")
 //  8. when I go to /song/1 then I can see "Rap" genre
