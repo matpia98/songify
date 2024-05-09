@@ -3,6 +3,7 @@ package com.songify.infrastructure.crud.song.controller;
 import com.songify.domain.crud.SongifyCrudFacade;
 import com.songify.domain.crud.dto.SongDto;
 import com.songify.domain.crud.dto.SongRequestDto;
+import com.songify.infrastructure.crud.song.controller.dto.response.UpdateGenreToSongResponseDto;
 import com.songify.infrastructure.crud.song.controller.dto.request.PartiallyUpdateSongRequestDto;
 import com.songify.infrastructure.crud.song.controller.dto.request.UpdateSongRequestDto;
 import com.songify.infrastructure.crud.song.controller.dto.response.*;
@@ -72,6 +73,12 @@ public class SongRestController {
         songFacade.updateSongById(id, newSongDto);
         UpdateSongResponseDto body = mapFromSongToUpdateSongResponseDto(newSongDto);
         return ResponseEntity.ok(body);
+    }
+
+    @PutMapping("/{songId}/genres/{genreId}")
+    ResponseEntity<UpdateGenreToSongResponseDto> updateGenre(@PathVariable Long songId, @PathVariable Long genreId) {
+        songFacade.assignGenreToSong(songId, genreId);
+        return ResponseEntity.ok(new UpdateGenreToSongResponseDto("Genre in song with id " + songId + " updated"));
     }
 
     @PatchMapping("/{id}")

@@ -19,6 +19,7 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -60,7 +61,7 @@ class HappyPathIntegrationTest {
 //        List<SongDto> songs = allSongsResponseDto.songs();
 //        assertThat(songs).isEmpty();
 
-//  2. when I post to /song with Song "Till i collapse" then Song "Till i collapse" is returned with id 1
+//  2. when I post to /songs with Song "Till i collapse" then Song "Till i collapse" is returned with id 1
         mockMvc.perform(post("/songs")
                         .content("""
                                 {
@@ -79,7 +80,7 @@ class HappyPathIntegrationTest {
                 .andExpect(jsonPath("$.song.genre.name", is("default")));
 
 
-//  3. when I post to /song with Song "Lose Yourself" then Song "Lose Yourself" is returned with id 2
+//  3. when I post to /songs with Song "Lose Yourself" then Song "Lose Yourself" is returned with id 2
         mockMvc.perform(post("/songs")
                         .content("""
                                 {
@@ -99,7 +100,7 @@ class HappyPathIntegrationTest {
 
 //  4. when I go to /genres then I can see only default genre with id 1
         mockMvc.perform(get("/genres")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.genres[0].id", is(1)))
                 .andExpect(jsonPath("$.genres[0].name", is("default")));
@@ -107,28 +108,32 @@ class HappyPathIntegrationTest {
 
 //  5. when I post to /genres with Genre "Rap" then Genre "Rap" is returned with id 2
         mockMvc.perform(post("/genres")
-                .content("""
-                        {
-                        "name": "Rap"
-                        }
-                        """.trim())
-                .contentType(MediaType.APPLICATION_JSON))
+                        .content("""
+                                {
+                                "name": "Rap"
+                                }
+                                """.trim())
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(2)))
                 .andExpect(jsonPath("$.name", is("Rap")));
 
-//  6. when I go to /song/1 then I can see default genre with id 1 and name default
+//  6. when I go to /songs/1 then I can see default genre with id 1 and name default
         mockMvc.perform(get("/songs/1")
-                .contentType("application/json"))
+                        .contentType("application/json"))
                 .andExpect(jsonPath("$.song.id", is(1)))
                 .andExpect(jsonPath("$.song.name", is("Till i collapse")))
                 .andExpect(jsonPath("$.song.genre.id", is(1)))
                 .andExpect(jsonPath("$.song.genre.name", is("default")));
 
+//  7. when I put to /songs/1/genres/2 then Genre with id 2 ("Rap") is added to Song with id 1 ("Til i collapse")
+        mockMvc.perform(put("/songs/1/genres/2")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message", is("Genre in song with id " + 1 + " updated")));
 
 
-//  7. when I put to /song/1/genre/1 then Genre with id 2 ("Rap") is added to Song with id 1 ("Til i collapse")
-//  8. when I go to /song/1 then I can see "Rap" genre
+//  8. when I go to /songs/1 then I can see "Rap" genre
 //  9. when I go to /albums then I can see no albums
 //  10. when I post to /albums with Album "EminemAlbum1" and Song with id 1 then Album "EminemAlbum1" is returned with id 1
 //  11. when I go to /albums/1 then I can not see any albums because there is no artist in system

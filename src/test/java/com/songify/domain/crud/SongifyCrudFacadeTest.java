@@ -6,6 +6,7 @@ import com.songify.domain.crud.dto.AlbumRequestDto;
 import com.songify.domain.crud.dto.ArtistDto;
 import com.songify.domain.crud.dto.ArtistRequestDto;
 import com.songify.domain.crud.dto.GenreDto;
+import com.songify.domain.crud.dto.GenreRequestDto;
 import com.songify.domain.crud.dto.SongDto;
 import com.songify.domain.crud.dto.SongLanguageDto;
 import com.songify.domain.crud.dto.SongRequestDto;
@@ -203,6 +204,53 @@ class SongifyCrudFacadeTest {
                 .extracting(GenreDto::name)
                 .isEqualTo("default");
     }
+
+    @Test
+    @DisplayName("Should update genre")
+    public void should_update_genre() {
+        // given
+        SongRequestDto song = SongRequestDto.builder()
+                .name("song1")
+                .language(SongLanguageDto.ENGLISH)
+                .build();
+        SongDto songDto = songifyCrudFacade.addSong(song);
+        assertThat(songDto.genre().id()).isEqualTo(1L);
+        assertThat(songDto.genre().name()).isEqualTo("default");
+
+        GenreDto genreDto = songifyCrudFacade.addGenre(new GenreRequestDto("Rock"));
+
+        // when
+        songifyCrudFacade.assignGenreToSong(songDto.id(), genreDto.id());
+
+        // then
+        SongDto songDtoById = songifyCrudFacade.findSongDtoById(songDto.id());
+        assertThat(songDtoById.genre().id()).isEqualTo(2L);
+        assertThat(songDtoById.genre().name()).isEqualTo("Rock");
+
+    }
+
+    @Test
+    @DisplayName("should add genre")
+    public void should_add_genre() {
+        // given
+        GenreRequestDto genreRequestDto = new GenreRequestDto("Rock");
+        assertThat(songifyCrudFacade.findGenreById(1L)).isNotNull();
+        assertThatThrownBy(() -> songifyCrudFacade.findGenreById(2L)).isInstanceOf(GenreNotFoundException.class);
+
+        // when
+        GenreDto genreDto = songifyCrudFacade.addGenre(genreRequestDto);
+
+        // then
+        GenreDto genre = songifyCrudFacade.findGenreById(genreDto.id());
+        assertThat(genre)
+                .extracting(GenreDto::id)
+                .isEqualTo(2L);
+        assertThat(genre)
+                .extracting(GenreDto::name)
+                .isEqualTo("Rock");
+
+    }
+
 
     @Test
     @DisplayName("Should add artist to album")
