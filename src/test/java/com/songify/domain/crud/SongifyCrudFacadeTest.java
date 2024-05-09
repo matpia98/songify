@@ -5,6 +5,7 @@ import com.songify.domain.crud.dto.AlbumInfo;
 import com.songify.domain.crud.dto.AlbumRequestDto;
 import com.songify.domain.crud.dto.ArtistDto;
 import com.songify.domain.crud.dto.ArtistRequestDto;
+import com.songify.domain.crud.dto.GenreDto;
 import com.songify.domain.crud.dto.SongDto;
 import com.songify.domain.crud.dto.SongLanguageDto;
 import com.songify.domain.crud.dto.SongRequestDto;
@@ -177,6 +178,30 @@ class SongifyCrudFacadeTest {
         assertThat(allSongs)
                 .extracting("id")
                 .containsExactly(0L);
+    }
+
+    @Test
+    @DisplayName("Should retrieve song with genre")
+    public void should_retrieve_song_with_genre(){
+        // given
+        SongRequestDto song = SongRequestDto.builder()
+                .name("song1")
+                .language(SongLanguageDto.ENGLISH)
+                .build();
+        SongDto songDto = songifyCrudFacade.addSong(song);
+
+        // when
+        SongDto songDtoById = songifyCrudFacade.findSongDtoById(songDto.id());
+
+        // then
+        assertThat(songDtoById.id()).isEqualTo(0L);
+        assertThat(songDtoById.name()).isEqualTo("song1");
+        assertThat(songDtoById.genre())
+                .extracting(GenreDto::id)
+                .isEqualTo(1L);
+        assertThat(songDtoById.genre())
+                .extracting(GenreDto::name)
+                .isEqualTo("default");
     }
 
     @Test
