@@ -2,7 +2,6 @@ package com.songify.domain.crud;
 
 import com.songify.domain.crud.dto.AlbumDto;
 import com.songify.domain.crud.dto.AlbumInfo;
-import com.songify.infrastructure.crud.album.AlbumNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
