@@ -328,6 +328,36 @@ class SongifyCrudFacadeTest {
     }
 
     @Test
+    @DisplayName("Should add song to album")
+    public void should_add_song_to_album() {
+        SongRequestDto songRequestDto = SongRequestDto.builder()
+                .name("song1")
+                .language(SongLanguageDto.ENGLISH)
+                .build();
+        SongDto songDto = songifyCrudFacade.addSong(songRequestDto);
+        AlbumRequestDto album = AlbumRequestDto
+                .builder()
+                .songIds(Set.of(songDto.id()))
+                .title("album title 1")
+                .build();
+        AlbumDto albumDto = songifyCrudFacade.addAlbumWithSong(album);
+        assertThat(albumDto.songIds()).containsExactly(0L);
+
+        SongRequestDto songRequestDto2 = SongRequestDto.builder()
+                .name("song2")
+                .language(SongLanguageDto.ENGLISH)
+                .build();
+        SongDto newSongDto = songifyCrudFacade.addSong(songRequestDto2);
+
+        // when
+        AlbumDto updatedAlbumDto = songifyCrudFacade.addSongToAlbum(albumDto.id(), newSongDto.id());
+
+        // then
+        assertThat(updatedAlbumDto.id()).isEqualTo(albumDto.id());
+        assertThat(updatedAlbumDto.songIds()).containsExactlyInAnyOrder(0L, 1L);
+    }
+
+    @Test
     @DisplayName("Should throw exception when album not found by id")
     public void should_throw_exception_when_album_not_found_by_id(){
         // given

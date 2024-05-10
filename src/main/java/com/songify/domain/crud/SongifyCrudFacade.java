@@ -36,6 +36,7 @@ public class SongifyCrudFacade {
     private final AlbumAdder albumAdder;
     private final GenreRetriever genreRetriever;
     private final GenreAssigner genreAssigner;
+    private final SongAssigner songAssigner;
 
 
     public ArtistDto addArtist(ArtistRequestDto dto) {
@@ -153,6 +154,10 @@ public class SongifyCrudFacade {
 
     public void assignGenreToSong(Long songId, Long genreId) {
         genreAssigner.assignGenreToSong(songId, genreId);
+    }
+
+    public AlbumDto addSongToAlbum(Long albumId, Long songId) {
+        return songAssigner.assignSongToAlbum(albumId, songId);
     }
 
 //    public void deleteSongAndGenreById(Long songId) {
