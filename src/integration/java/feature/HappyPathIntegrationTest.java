@@ -205,8 +205,13 @@ class HappyPathIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("EminemAlbum1")))
-                .andExpect(jsonPath("$.songIds", containsInAnyOrder(1,2)));
+                .andExpect(jsonPath("$.songIds", containsInAnyOrder(1, 2)));
 
 //  16. when I go to /albums/1 then I can see album with 2 songs (id1 and id2)
+        mockMvc.perform(get("/albums/1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.songs[*].id", containsInAnyOrder(1, 2)));
     }
 }
