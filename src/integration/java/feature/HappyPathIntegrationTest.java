@@ -17,6 +17,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -185,12 +186,19 @@ class HappyPathIntegrationTest {
 
 //  13. when I put to /artists/1/albums/1 then Artist with id 1 ("Eminem") is added to Album with id 1 ("EminemAlbum1")
         mockMvc.perform(put("/artists/1/albums/1")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message", is("probably assigned artist to album")));
 
 
 //  14. when I go to /albums/1 then I can see album with single song with id 1 and single artist with id 1
+        mockMvc.perform(get("/albums/1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.songs[*].id", hasItem(1)))
+                .andExpect(jsonPath("$.artists[*].id", hasItem(1)));
+
+
 //  15. when I put to /albums/1/songs/2 then Song with id 2 ("Lose Yourself") is added to Album with id 1 ("EminemAlbum1")
 //  16. when I go to /albums/1 then I can see album with 2 songs (id1 and id2)
     }
